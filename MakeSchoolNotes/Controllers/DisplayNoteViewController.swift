@@ -38,6 +38,7 @@ class DisplayNoteViewController: UIViewController {
         switch identifier {
         
         case "save" where note != nil:
+            
             note?.title = titleTextField.text ?? ""
             note?.content = contentTextView.text ?? ""
             
@@ -45,13 +46,12 @@ class DisplayNoteViewController: UIViewController {
             
         
         case "save" where note == nil:
-            let note = Note()
+            let note = CoreDataHelper.newNote()
             note.title = titleTextField.text ?? ""
             note.content = contentTextView.text ?? ""
             note.modificationTime = Date()
             
-            
-            destination.notes.append(note)
+            CoreDataHelper.saveNote()
             
         case "cancel":
             print("cancel bar button item tapped")
